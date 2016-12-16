@@ -1,0 +1,1 @@
+# snap-plugin-processor-logs-apache
