@@ -1,4 +1,4 @@
-# snap plugin processor logs apache
+# snap plugin processor logs regexp
 
 1. [Contributing Code](#contributing-code)
 2. [Contributing Examples](#contributing-examples)
@@ -11,7 +11,7 @@ This repository is primarily **community supported**. We both appreciate and nee
 ## Contributing Code
 **_IMPORTANT_**: We encourage contributions to the project from the community. We ask that you keep the following guidelines in mind when planning your contribution.
 
-* Whether your contribution is for a bug fix or a feature request, **create an [Issue](https://github.com/intelsdi-x/snap-plugin-processor-logs-apache/issues)** and let us know what you are thinking.
+* Whether your contribution is for a bug fix or a feature request, **create an [Issue](https://github.com/intelsdi-x/snap-plugin-processor-logs-regexp/issues)** and let us know what you are thinking.
 * **For bugs**, if you have already found a fix, feel free to submit a Pull Request referencing the Issue you created. Include the `Fixes #` syntax to link it to the issue you're addressing.
 * **For feature requests**, we want to improve upon the library incrementally which means small changes at a time. In order to ensure your PR can be reviewed in a timely manner, please keep PRs small, e.g. <10 files and <500 lines changed. If you think this is unrealistic, then mention that within the issue and we can discuss it.
 
@@ -22,7 +22,7 @@ Once you're ready to contribute code back to this repo, start with these steps:
 
     ```
 $ cd "${GOPATH}/src/github.com/intelsdi-x/"
-$ git clone https://github.com/intelsdi-x/snap-plugin-processor-logs-apache.git
+$ git clone https://github.com/intelsdi-x/snap-plugin-processor-logs-regexp.git
     ```
 * Create a topic branch for your change and checkout that branch:
 

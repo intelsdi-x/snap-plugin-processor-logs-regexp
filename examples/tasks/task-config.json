@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "schedule": {
+    "type": "simple",
+    "interval": "15s"
+  },
+  "workflow": {
+    "collect": {
+      "metrics": {
+        "/intel/logs/*": {}
+      },
+      "process": [
+        {
+          "plugin_name": "logs-regexp",
+          "config": {
+            "regexp_log": "(?P<client_ip>\\S+) (\\S{1,}) (\\S{1,}) [[](?P<timestamp>\\d{2}[/]\\S+[/]\\d{4}[:]\\d{2}[:]\\d{2}[:]\\d{2} \\S\\d+)[]] (?P<message>.*)",
+            "regexp_message": "(?P<http_method>[A-Z]{3,}) (?P<http_url>/\\S*) HTTP/(?P<http_version>\\d+.\\d+)\" (?P<http_status>\\d*) (?P<http_response_size>\\S*) (?P<http_response_time>\\S*)",
+            "regexp_time" : "(?P<day>\\d{2})/(?P<month>[a-zA-Z]+)/(?P<year>\\d{4}):(?P<hour>\\d{2}):(?P<minutes>\\d{2}):(?P<seconds>\\d{2}) (?P<timezone>.\\d+)"
+          },
+          "process": null,
+          "publish": [
+            {
+              "plugin_name": "file",
+              "config": {
+                "file": "/tmp/published_logs_with_config.log"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

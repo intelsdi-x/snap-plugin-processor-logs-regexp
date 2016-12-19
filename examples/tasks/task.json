@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "schedule": {
+    "type": "simple",
+    "interval": "15s"
+  },
+  "workflow": {
+    "collect": {
+      "metrics": {
+        "/intel/logs/*": {}
+      },
+      "process": [
+        {
+          "plugin_name": "logs-regexp",
+          "config": {
+          },
+          "process": null,
+          "publish": [
+            {
+              "plugin_name": "file",
+              "config": {
+                "file": "/tmp/published_logs.log"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
