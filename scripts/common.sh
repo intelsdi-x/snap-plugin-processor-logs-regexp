@@ -71,7 +71,7 @@ _go_get() {
 
 _goimports() {
   _go_get golang.org/x/tools/cmd/goimports
-  test -z "$(goimports -l -d $(find . -type f -name '*.go' -not -path "./vendor/*") | tee /dev/stderr)"
+  test -z "$(goimports -l -d $(find . -type f -name '*.go' -not -path "./vendor/*" -not -path "./.glide/*") | tee /dev/stderr)"
 }
 
 _golint() {
