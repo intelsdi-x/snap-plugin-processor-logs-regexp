@@ -1,3 +1,22 @@
+<!--
+http://www.apache.org/licenses/LICENSE-2.0.txt
+
+
+    Copyright 2016 Intel Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
 # Snap plugin processor - logs-regexp
 
 Snap plugin intended to process logs using regular expressions.
@@ -7,6 +26,7 @@ Snap plugin intended to process logs using regular expressions.
   * [Installation](#installation)
   * [Configuration and Usage](#configuration-and-usage)
 2. [Documentation](#documentation)
+  * [Examples](#examples)
   * [Roadmap](#roadmap)
 3. [Community Support](#community-support)
 4. [Contributing](#contributing)
@@ -67,6 +87,75 @@ to Snap's metric with:
     - `http_status`: `200`
     - `http_response_size`: `446`
     - `http_response_time`: `21747`
+
+### Examples
+
+This is an example running [snap-plugin-collector-logs](https://github.com/intelsdi-x/snap-plugin-collector-logs),
+processing collected regexp-logs and writing post-processed data to a file.
+It is assumed that you are using the latest Snap binary and plugins.
+
+In one terminal window, open the Snap daemon (in this case with logging set to 1 and trust disabled) with appropriate configuration needed by logs collector.
+To do that properly, please follow the instruction on [snap-plugin-collector-logs](https://github.com/intelsdi-x/snap-plugin-collector-logs).
+```
+$ snapteld -l 1 -t 0 --config config.json
+```
+In another terminal window:
+
+Download and load plugins:
+```
+$ wget http://snap.ci.snap-telemetry.io/plugins/snap-plugin-collector-logs/latest/linux/x86_64/snap-plugin-collector-log
+$ wget http://snap.ci.snap-telemetry.io/plugins/snap-plugin-processor-logs-regexp/latest/linux/x86_64/snap-plugin-processor-logs-regexp
+$ wget http://snap.ci.snap-telemetry.io/plugins/snap-plugin-publisher-file/latest/linux/x86_64/snap-plugin-publisher-file
+$ snaptel plugin load snap-plugin-collector-logs
+$ snaptel plugin load snap-plugin-processor-logs-regexp
+$ snaptel plugin load snap-plugin-publisher-file
+```
+Create a task manifest - see examplary task manifests in [examples/tasks](examples/tasks/):
+```json
+{
+  "version": 1,
+  "schedule": {
+    "type": "simple",
+    "interval": "15s"
+  },
+  "workflow": {
+    "collect": {
+      "metrics": {
+        "/intel/logs/*": {}
+      },
+      "process": [
+        {
+          "plugin_name": "logs-regexp",
+          "config": {
+            "regexp_log": "(?P<client_ip>\\S+) (\\S{1,}) (\\S{1,}) [[](?P<timestamp>\\d{2}[/]\\S+[/]\\d{4}[:]\\d{2}[:]\\d{2}[:]\\d{2} \\S\\d+)[]] (?P<message>.*)",
+            "regexp_message": "(?P<http_method>[A-Z]{3,}) (?P<http_url>/\\S*) HTTP/(?P<http_version>\\d+.\\d+)\" (?P<http_status>\\d*) (?P<http_response_size>\\S*) (?P<http_response_time>\\S*)",
+            "regexp_time" : "(?P<day>\\d{2})/(?P<month>[a-zA-Z]+)/(?P<year>\\d{4}):(?P<hour>\\d{2}):(?P<minutes>\\d{2}):(?P<seconds>\\d{2}) (?P<timezone>.\\d+)"
+          },
+          "process": null,
+          "publish": [
+            {
+              "plugin_name": "file",
+              "config": {
+                "file": "/tmp/published_logs_with_config.log"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+Create a task:
+```
+$ snaptel task create -t task-config.json
+```
+
+To stop task:
+```
+$ snaptel task stop <task_id>
+```
 
 ### Roadmap
 There isn't a current roadmap for this plugin, but it is in active development. As we launch this plugin, we do not have any outstanding requirements for the next release.
