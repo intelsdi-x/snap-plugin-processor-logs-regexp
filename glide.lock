@@ -1,19 +1,19 @@
-hash: da38d220bad05bd00b974d12540ea4a74aab0c60b695ebcf89dae9923b7750c5
-updated: 2016-12-21T05:27:36.334847527-05:00
+hash: c1df6cf919dc25e0cf137b973d28ac4af1a5fdb5975c25b147d3eeca55f634db
+updated: 2017-04-24T16:05:20.347958003+02:00
 imports:
 - name: github.com/golang/protobuf
   version: 888eb0692c857ec880338addf316bd662d5e630e
   subpackages:
   - proto
 - name: github.com/intelsdi-x/snap-plugin-lib-go
-  version: 4b5999a62ffb7604f173c1ab3c2205ba8b559624
+  version: 3527311f5c8e6fe9b55fc1f44e1b515a30845e18
   subpackages:
   - v1/plugin
   - v1/plugin/rpc
 - name: github.com/julienschmidt/httprouter
-  version: 4563b0ba73e4db6c6423b60a26f3cadd2e9a1ec9
+  version: 6f3f3919c8781ce5c0509c83fffc887a7830c938
 - name: github.com/Sirupsen/logrus
-  version: be52937128b38f1d99787bb476c789e2af1147f1
+  version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
 - name: golang.org/x/net
   version: 154d9f9ea81208afed560f4cf27b4860c8ed1904
   subpackages:
@@ -24,7 +24,7 @@ imports:
   - lex/httplex
   - trace
 - name: golang.org/x/sys
-  version: 8f0908ab3b2457e2e15403d3697c9ef5cb4b57a9
+  version: ea9bcade75cb975a0b9738936568ab388b845617
   subpackages:
   - unix
 - name: google.golang.org/grpc
@@ -51,7 +51,7 @@ testImports:
   - internal/go-render/render
   - internal/oglematchers
 - name: github.com/smartystreets/goconvey
-  version: 995f5b2e021c69b8b028ba6d0b05c1dd500783db
+  version: d4c757aa9afd1e2fc1832aaab209b5794eb336e1
   subpackages:
   - convey
   - convey/gotest

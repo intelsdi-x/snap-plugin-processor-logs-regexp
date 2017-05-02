@@ -31,7 +31,7 @@ const (
 	//Name of the plugin
 	Name = "logs-regexp"
 	//Version of the plugin
-	Version = 1
+	Version = 2
 
 	timeFormat           = "02 Jan 2006 15:04:05 -0700"
 	configLogRegexp      = "regexp_log"
