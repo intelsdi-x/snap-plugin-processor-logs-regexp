@@ -1,5 +1,12 @@
-package: github.com/intelsdi-x/snap-plugin-processor-logs-apache
+package: github.com/intelsdi-x/snap-plugin-processor-logs-regexp
 import:
+- package: github.com/Sirupsen/logrus
+  version: ^0.11.5
 - package: github.com/intelsdi-x/snap-plugin-lib-go
   subpackages:
   - v1/plugin
+testImport:
+- package: github.com/smartystreets/goconvey
+  version: ^1.6.2
+  subpackages:
+  - convey
